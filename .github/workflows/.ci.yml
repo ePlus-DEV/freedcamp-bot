@@ -18,6 +18,7 @@ jobs:
           response=$(curl -X GET "https://freedcamp.com/api/v1/tasks?api_key=$api_key&timestamp=$timestamp&hash=$hash&limit=200&offset=0&filter%5Bcreated_by_id%5D%5B%5D=$created_by_id&filter%5Bcreated_date%5D%5B%5D=7&order%5Bpriority%5D=asc")
           echo "$response" | jq -r '.data.tasks[] | select(.title | test("^#[0-9]+ ")) | .id' | while read task_id; do
             new_title=$(echo "#$task_id - $(echo "$response" | jq -r --arg task_id "$task_id" '.data.tasks[] | select(.id == $task_id) | .title')")
-            echo "Updating task with ID $task_id to new title: $new_title"
-            # Add code here to update the task title
+            if [[ "$new_title" != "#"* ]]; then
+              echo "Updating task with ID $task_id to new title: $new_title"
+            fi
           done
