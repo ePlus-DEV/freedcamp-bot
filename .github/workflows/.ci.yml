@@ -28,7 +28,7 @@ jobs:
           #     --form 'data={"title":"'"$new_title"'"}'
           #   fi
           # done
-          echo "$json_content" | jq -r '.data.tasks[] | select(.title | startswith("#") | not) | @base64' | while read task; do
+          echo "$response" | jq -r '.data.tasks[] | select(.title | startswith("#") | not) | @base64' | while read task; do
             _jq() {
               echo ${task} | base64 --decode | jq -r ${1}
             }
