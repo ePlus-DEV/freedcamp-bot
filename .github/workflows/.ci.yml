@@ -20,6 +20,7 @@ jobs:
       - name: Check for tasks in data
         run: |
           response="${{ steps.api_call.outputs.response }}"
+          echo "$response"
           titles=$(echo "$response" | jq -r '.data.tasks[].title')
           for title in $titles; do
             if [[ $title == \#* ]]; then
