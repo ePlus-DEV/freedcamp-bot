@@ -21,10 +21,8 @@ jobs:
             new_title=$(echo "#$task_id - $(echo "$response" | jq -r --arg task_id "$task_id" '.data.tasks[] | select(.id == $task_id) | .title')")
             if [[ "$new_title" != "#"* ]]; then
               echo "Updating task with ID $task_id to new title: $new_title"
-              curl -X POST 'https://freedcamp.com/api/v1/tasks/'"$task_id"'?api_key='"$api_key"'&timestamp='"$timestamp"'&hash='"$hash"' \
-              --header 'Content-Type: application/json' \
-              --data-raw '{
-                "title": "'"$title"'"
-              }'
+              curl -X POST "$endpoint$task_id?api_key=$api_key&timestamp=$timestamp&hash=$hash" \
+              --header 'Content-Type: multipart/form-data' \
+              --form 'data={"title":"'"$new_title"'"}'
             fi
           done
