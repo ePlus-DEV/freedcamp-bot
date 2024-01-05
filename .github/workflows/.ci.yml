@@ -25,4 +25,4 @@ jobs:
           timestamp=$TIMESTAMP
           hash=$HASH
           created_by_id="${{ secrets.FREEDCAMP_CREATED_BY_ID }}"
-          curl -X GET "https://freedcamp.com/api/v1/tasks?api_key=$api_key&timestamp=$timestamp&hash=$hash&limit=200&offset=0&filter[created_by_id][0]=$created_by_id&created_date[0]=7&sort[priority]=asc"
+            curl -X GET 'https://freedcamp.com/api/v1/tasks?api_key=$api_key&timestamp=$timestamp&hash=$hash&limit=200&offset=0&filter[created_by_id][0]=$created_by_id&created_date[0]=7&sort[priority]=asc'
