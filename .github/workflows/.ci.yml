@@ -36,6 +36,6 @@ jobs:
             title=$(_jq '.title')
             new_title="#${id} - ${title}"
             echo "New title for task with ID $id: $new_title"
-            curl -X POST "$endpoint$task_id?api_key=$api_key&timestamp=$timestamp&hash=$hash" \
+            curl -X POST "$endpoint$id?api_key=$api_key&timestamp=$timestamp&hash=$hash" \
             --form 'data={"title":"'"$new_title"'"}'
           done
