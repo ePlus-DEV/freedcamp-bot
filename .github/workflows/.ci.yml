@@ -8,7 +8,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Call API with Hash
+      - name: Call API
         run: |
           endpoint=${{ secrets.FREEDCAMP_API_ENDPOINT }}
           api_key="${{ secrets.FREEDCAMP_API_KEY }}"
