@@ -19,7 +19,6 @@ jobs:
           echo "$response"
       - name: Check for tasks in data
         run: |
-          response="$response"
           echo "$response" | jq -r '.data.tasks[] | select(.title | startswith("#")) | .id' | while read task_id; do
             echo "Task with ID $task_id has a title that starts with '#'."
           done
