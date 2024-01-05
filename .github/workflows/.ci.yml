@@ -16,8 +16,11 @@ jobs:
           api_secret="${{ secrets.FREEDCAMP_API_SECRET }}"
           hash=$(echo -n "$api_key$timestamp" | openssl dgst -sha1 -hmac "$api_secret" | awk '{print $2}')
           echo "::set-output name=hash::$hash"
-          echo "TIMESTAMP=$timestamp" >> $GITHUB_ENV
-          echo "HASH=$hash" >> $GITHUB_ENV
+          touch .env
+          echo FREEDCAMP_API_KEY="${{ secrets.FREEDCAMP_API_KEY }}" >> .env
+          echo FREEDCAMP_API_SECRET="${{ secrets.FREEDCAMP_API_SECRET }}" >> .env
+          echo "TIMESTAMP=$timestamp" >> .env
+          echo "HASH=$hash" >> .env
 
       - name: Call API with Hash
         run: |
